@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat vs. Dog Predictor</title>
+</head>
+<body>
+    <h1>Cat vs. Dog Predictor</h1>
+    <input type="file" id="fileInput">
+    <button id="predictButton">Predict</button>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById('predictButton').addEventListener('click', function() {
+            let fileInput = document.getElementById('fileInput');
+            let file = fileInput.files[0];
+
+            if (file) {
+                let formData = new FormData();
+                formData.append('file', file);
+
+                fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('result').innerText = `It's a ${data.class}`;
+                })
+                .catch(error => {
+                    console.error('Prediction failed:', error);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
