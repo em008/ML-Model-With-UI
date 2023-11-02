@@ -1,19 +1,22 @@
 from flask import Flask, request, jsonify
-import numpy as np
-import tensorflow as tf
-from tensorflow import keras
 
-app = Flask(__name)
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
 
 # Load model
 model ='model.py'
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    prediction = model.predict()
+    data = request.get_json()
+    text = data['text']
+    prediction = model.predict([text])
 
-    result = {prediction[0][0]}
+    result = {'category': prediction[0]}
     return jsonify(result)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
