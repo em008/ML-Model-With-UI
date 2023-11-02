@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Scanned Receipts Predictor</title>
+    <title>Text Classification</title>
 </head>
 <body>
-    <h1>Scanned Receipts Predictor</h1>
-    <button id="predictButton">Predict</button>
+    <h1>Text Classification</h1>
+    <textarea id="textInput" rows="4" cols="50" placeholder="Enter text for classification"></textarea>
+    <button id="classifyButton">Classify</button>
     <p id="result"></p>
 
     <script>
-        document.getElementById('predictButton').addEventListener('click', function() {
-          
-            let formData = new FormData();
+        document.getElementById('classifyButton').addEventListener('click', function() {
+            let inputText = document.getElementById('textInput').value;
 
             fetch('/predict', {
-              method: 'POST',
-              body: formData
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: inputText }),
             })
-              .then(response => response.json())
-              .then(data => {document.getElementById('result').innerText = `${data.class}`;
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Predicted category: ${data.category}`;
             })
-              .catch(error => {
-              console.error('Prediction failed:', error);
+            .catch(error => {
+                console.error('Classification failed:', error);
             });
-
         });
     </script>
 </body>
