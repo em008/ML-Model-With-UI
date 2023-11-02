@@ -12,7 +12,7 @@ model ='model.py'
 def predict():
     prediction = model.predict()
 
-    result = {if prediction[0][0] else 'error': 'Try again'}
+    result = {prediction[0][0]}
     return jsonify(result)
 
 if __name__ == '__main__':
