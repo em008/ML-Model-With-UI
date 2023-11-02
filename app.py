@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import model  # Import ML model module
 
 app = Flask(__name__)
 
@@ -7,13 +8,13 @@ def hello_world():
     return 'Hello, World!'
 
 # Load model
-model ='model.py'
+ml_model = model
 
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
     text = data['text']
-    prediction = model.predict([text])
+    prediction = ml_model.predict([text])
 
     result = {'category': prediction[0]}
     result = list(result)
