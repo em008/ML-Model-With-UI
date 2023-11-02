@@ -13,8 +13,6 @@ data = pd.read_csv(url)
 # Ensure that the "Date" column is in a proper date format
 data['Date'] = pd.to_datetime(data['# Date'])
 
-# print(data)
-
 # Feature Engineering:
 # Extract various features like year, month, day from date data
 data['Year'] = data['Date'].dt.year
@@ -58,6 +56,6 @@ print(f"Mean Squared Error: {mse}")
 
 # Make Predictions:
 # Once the model is trained and evaluated make predictions on future dates by providing the corresponding feature values
-future_date_features = np.array([[2022, 11]])
+future_date_features = np.array([[2022, 10]])
 predicted_receipt_count = model.predict(future_date_features)
 print(f"Predicted Receipt Count for Future Date: {predicted_receipt_count[0][0]}")
