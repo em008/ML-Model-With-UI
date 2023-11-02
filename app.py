@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import model  # Import ML model module
+import model_function  # Import ML model function module
 
 app = Flask(__name__)
 
@@ -7,17 +7,13 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
-# Load model
-ml_model = model
-
 @app.route('/predict', methods=['POST'])
-def predict():
+def predict_count():
     data = request.get_json()
-    text = data['text']
-    prediction = ml_model.predict([text])
-
-    result = {'category': prediction[0]}
-    result = list(result)
+    input_texts = [data['text1'], data['text2']]
+    predictions = model_function.predict_count(input_texts)
+    
+    result = {'predition results': result}
     return jsonify(result)
 
 if __name__ == '__main__':
