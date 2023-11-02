@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Text Classification</title>
+    <title>Scanned Receipts Predictor</title>
 </head>
 <body>
-    <h1>Text Classification</h1>
-    <textarea id="textInput" rows="4" cols="50" placeholder="Enter text for classification"></textarea>
-    <button id="classifyButton">Classify</button>
-    <p id="result"></p>
+    <h1>Scanned Receipts Predictor</h1>
+    <input type="text" id="text1" placeholder="Enter text 1 for classification">
+    <input type="text" id="text2" placeholder="Enter text 2 for classification">
+    <button id="classifyButton">Predict</button>
+    <p id="result1"></p>
+    <p id="result2"></p>
 
     <script>
         document.getElementById('classifyButton').addEventListener('click', function() {
-            let inputText = document.getElementById('textInput').value;
+            const text1 = document.getElementById('text1').value;
+            const text2 = document.getElementById('text2').value;
 
             fetch('/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ text: inputText }),
+                body: JSON.stringify({ text1, text2 }),
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = `Predicted category: ${data.category}`;
+                document.getElementById('result1').innerText = `Predicted 1: ${data.prediction}`;
+                document.getElementById('result2').innerText = `Predicted 2: ${data.prediction}`;
             })
             .catch(error => {
-                console.error('Classification failed:', error);
+                console.error('Prediction failed:', error);
             });
         });
     </script>
