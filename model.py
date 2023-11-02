@@ -60,5 +60,5 @@ print(f"Mean Squared Error: {mse}")
 # Make Predictions:
 # Once the model is trained and evaluated make predictions on future dates by providing the corresponding feature values
 future_date_features = np.array([[2022, 11]])
-predicted_count = model.predict(future_date_features)
-print(f"Predicted Count for Future Date: {predicted_count[0][0]}")
+predicted_receipt_count = model.predict(future_date_features)
+print(f"Predicted Receipt Count for Future Date: {predicted_receipt_count[0][0]}")
