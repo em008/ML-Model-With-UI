@@ -16,6 +16,7 @@ def predict():
     prediction = model.predict([text])
 
     result = {'category': prediction[0]}
+    result = list(result)
     return jsonify(result)
 
 if __name__ == '__main__':
