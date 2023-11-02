@@ -13,7 +13,7 @@ def predict_count():
     input_texts = [data['text1'], data['text2']]
     predictions = model_function.predict_count(input_texts)
     
-    result = {'predition results': result}
+    result = {'prediction': result}
     return jsonify(result)
 
 if __name__ == '__main__':
