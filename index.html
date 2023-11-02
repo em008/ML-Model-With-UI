@@ -5,11 +5,10 @@
 </head>
 <body>
     <h1>Scanned Receipts Predictor</h1>
-    <input type="text" id="text1" placeholder="Enter text 1 for classification">
-    <input type="text" id="text2" placeholder="Enter text 2 for classification">
+    <input type="text" id="text1" placeholder="Enter year (yyyy)">
+    <input type="text" id="text2" placeholder="Enter month (mm)">
     <button id="classifyButton">Predict</button>
     <p id="result1"></p>
-    <p id="result2"></p>
 
     <script>
         document.getElementById('classifyButton').addEventListener('click', function() {
@@ -26,7 +25,6 @@
             .then(response => response.json())
             .then(data => {
                 document.getElementById('result1').innerText = `Predicted 1: ${data.prediction}`;
-                document.getElementById('result2').innerText = `Predicted 2: ${data.prediction}`;
             })
             .catch(error => {
                 console.error('Prediction failed:', error);
