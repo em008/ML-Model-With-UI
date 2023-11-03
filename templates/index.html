@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scanned Receipts Predictor</title>
+</head>
+<body>
+    
+    <div>
+    <h1>Scanned Receipts Predictor</h1>
+    <h3>Enter the following values to predict the scanned receipts for future dates</h3>
+
+    <!-- Form used for user input used for machine learning -->
+    <form action="{{url_for('predict')}}" method="post">
+        <input type="text" name="year" placeholder="Enter year (yyyy)" required="required" />
+        <input type="text" name="month" placeholder="Enter month (mm)" required="required" />
+        <button type="submit" class="btn">Predict</button>
+    </form>
+
+    <br>
+    {{prediction_result}}
+    </div>
+
+    <!-- <script>
+        document.getElementById('classifyButton').addEventListener('click', function() {
+            const text1 = document.getElementById('text1').value;
+            const text2 = document.getElementById('text2').value;
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text1, text2 }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result1').innerText = `Predicted 1: ${data.prediction}`;
+            })
+            .catch(error => {
+                console.error('Prediction failed:', error);
+            });
+        });
+    </script> -->
+
+</body>
+</html>
