@@ -6,6 +6,6 @@ To run app locally in a CLI navigate to the directory that contains the app.py a
 Then run the command: `python app.py`
 
 Tech Stack
-Machine learning model: Python, Tensorflow, Keras
-Backend: Python, Flask
-Frontend: JavaScript, HTML
+- Machine learning model: Python, Tensorflow, Keras
+- Backend: Python, Flask
+- Frontend: JavaScript, HTML
