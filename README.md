@@ -8,4 +8,4 @@ Then run the command: `python app.py`. The app will run on this local developmen
 Tech Stack
 - Machine learning model: Python, Tensorflow, Keras
 - Backend: Python, Flask
-- Frontend: JavaScript, HTML
+- Frontend: JavaScript, HTML, CSS
