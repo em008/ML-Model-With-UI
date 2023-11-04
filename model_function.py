@@ -1,9 +1,19 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 
-def prediction_model(data):
+# Data Preparation:
+# URL of the website or API endpoint to fetch data from
+url = 'https://fetch-hiring.s3.amazonaws.com/machine-learning-engineer/receipt-count-prediction/data_daily.csv'
+
+# Load data
+data = pd.read_csv(url)
+
+# Ensure that the "Date" column is in a proper date format
+data['Date'] = pd.to_datetime(data['# Date'])
+
+def train_count_prediction_model(data):
     # Feature Engineering:
     # Extract various features like year, month, day from date data
     data['Year'] = data['Date'].dt.year
@@ -20,7 +30,7 @@ def prediction_model(data):
     y_train, y_test = y[:train_size], y[train_size:]
 
     # Choose a Model:
-    # Build a neural network model
+    # Build the neural network model
     model = keras.Sequential([
         keras.layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),
         keras.layers.Dense(64, activation='relu'),
@@ -37,27 +47,29 @@ def prediction_model(data):
     y_test = y_test.to_numpy()
 
     # Training:
-    # Train model using the training data
+    # Train the model using the training data
     model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=(X_test, y_test))
 
     return model
 
-# Example usage:
-if __name__ == "__main__":
-    # Data Preparation:
-    # URL of the website or API endpoint to fetch data from
+def predict_count_for_date(trained_model, date_features):
+    # Create and train the model
+    trained_model = train_count_prediction_model(data)
+
+    # Make predictions for user input date features
+    date_features = np.array(date_features).reshape(1, -1)
+    predicted_count = trained_model.predict(date_features)
+    return predicted_count[0][0]
+
+# Example:
+if __name__ == "__main":    
     url = 'https://fetch-hiring.s3.amazonaws.com/machine-learning-engineer/receipt-count-prediction/data_daily.csv'
-
-    # Load data
     data = pd.read_csv(url)
-
-    # Ensure that the "Date" column is in a proper date format
     data['Date'] = pd.to_datetime(data['# Date'])
 
-    # Create and train the model
-    trained_model = prediction_model(data)
+    trained_model = train_count_prediction_model(data)
     
-    # Example: Make predictions for future dates
-    future_date_features = pd.DataFrame({'Year': [2022], 'Month': [10]})
-    predicted_receipt_count = trained_model.predict(future_date_features)
-    print(f"Predicted Receipt Count for Future Date: {predicted_receipt_count[0][0]}")
+   # Predict the count for the given date
+    date_features = [2022, 10]
+    predicted_count = predict_count_for_date(trained_model, date_features)    
+    print(f"Predicted Receipt Count for the Given Date: {predicted_count}")
