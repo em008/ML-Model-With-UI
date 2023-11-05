@@ -3,6 +3,7 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 
+tf.keras.callbacks.EarlyStopping
 # Data Preparation:
 # URL of the website or API endpoint to fetch data from
 url = 'https://fetch-hiring.s3.amazonaws.com/machine-learning-engineer/receipt-count-prediction/data_daily.csv'
@@ -47,15 +48,17 @@ def train_count_prediction_model(data):
     y_test = y_test.to_numpy()
 
     # Training:
+    # Define early stopping
+    # This stops training when a monitored metric has stopped improving, which can prevent overfitting and save training time
+    # Training will stop if the validation loss (‘val_loss’) does not improve for 10 epochs
+    early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10)
+    
     # Train the model using the training data
-    model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=(X_test, y_test))
+    model.fit(X_train, y_train, epochs=50, batch_size=32, validation_data=(X_test, y_test), callbacks=[early_stopping])
 
     return model
 
 def predict_count_for_date(trained_model, date_features):
-    # Trained model
-    trained_model = model
-
     # Convert date_features to a NumPy array
     date_features = np.array(date_features).reshape(1, -1)
 
@@ -65,9 +68,12 @@ def predict_count_for_date(trained_model, date_features):
     return predicted_count[0][0]
 
 # Example:
-if __name__ == "__main__":        
+if __name__ == "__main__":       
+    # Train the model
+    trained_model = train_count_prediction_model(data)
+
     # Predict the count for the given date
     date_features = [2022, 10]
-    predicted_receipt_count = predict_count_for_date(model, date_features)    
+    predicted_receipt_count = predict_count_for_date(trained_model, date_features)    
     print(f"Predicted receipt count for the given date: {predicted_receipt_count}")
     
