@@ -65,16 +65,9 @@ def predict_count_for_date(trained_model, date_features):
     return predicted_count[0][0]
 
 # Example:
-if __name__ == "__main__":    
-    # Data
-    url = 'https://fetch-hiring.s3.amazonaws.com/machine-learning-engineer/receipt-count-prediction/data_daily.csv'
-    data = pd.read_csv(url)
-    data['Date'] = pd.to_datetime(data['# Date'])
-
-    # Create and train the model
-    trained_model = train_count_prediction_model(data)
-    
+if __name__ == "__main__":        
     # Predict the count for the given date
     date_features = [2022, 10]
-    predicted_count = predict_count_for_date(trained_model, date_features)    
-    print(f"Predicted Receipt Count for the Given Date: {predicted_count}")
+    predicted_receipt_count = predict_count_for_date(model, date_features)    
+    print(f"Predicted receipt count for the given date: {predicted_receipt_count}")
+    
