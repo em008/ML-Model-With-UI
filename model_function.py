@@ -3,7 +3,6 @@ import pandas as pd
 import tensorflow as tf
 from tensorflow import keras
 
-tf.keras.callbacks.EarlyStopping
 # Data Preparation:
 # URL of the website or API endpoint to fetch data from
 url = 'https://fetch-hiring.s3.amazonaws.com/machine-learning-engineer/receipt-count-prediction/data_daily.csv'
