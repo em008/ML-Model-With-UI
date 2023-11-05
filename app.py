@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, render_template # Import libraries
 import model_function  # Import ML model function module
-import pandas as pd
 import numpy as np 
 
 # Initialize Flask app
