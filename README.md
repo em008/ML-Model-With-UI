@@ -1,5 +1,8 @@
 # ML-Model-With-UI
 
+For this project a neural network regression model is built using TensorFlow and Keras. A simple web application is built using Flask that integrates the model.  
+
+
 To access the app in an internet browser use this [link](https://em008.github.io/ML-Model-With-UI/).
 
 To run app locally in a CLI navigate to the directory that contains the app.py and index.html files.
