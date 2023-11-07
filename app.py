@@ -14,9 +14,11 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
+        # Convert user input features to a NumPy array
         features = [int(i) for i in request.form.values()]
         final_features = [np.array(features)]
-    
+
+        # Use trained model and features to make prediction 
         trained_model = model.train_count_prediction_model(model.data)
         prediction = model.predict_count_for_date(trained_model, final_features)
     
