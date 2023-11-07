@@ -23,7 +23,7 @@ def predict():
         prediction = model.predict_count_for_date(trained_model, final_features)
     
         result = round(prediction, 2)
-        return render_template('index.html', prediction_result='The scanned receipt count for this date is :{}'.format(result))
+        return render_template('index.html', prediction_result='The scanned receipt count for this date is: {}'.format(result))
 
     except Exception as e:
         error_message = "An error occurred during prediction: {}".format(str(e))
