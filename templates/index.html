@@ -2,23 +2,60 @@
 <html>
 <head>
     <title>Scanned Receipts Predictor</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        div {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: center;
+        }
+
+        form input, form button {
+            margin: 5px;
+        }
+
+        /* Style the prediction_result section */
+        #prediction_result {
+            margin-top: 20px; /* Add some space between the form and result */
+            font-size: 18px; /* Increase the font size */
+            background-color: #f0f0f0; /* Light gray background color */
+            padding: 10px; /* Add padding */
+            border: 1px solid #ccc; /* Add a light gray border */
+            border-radius: 5px; /* Add rounded corners */
+        }
+    </style>
 </head>
 <body>
-    
     <div>
-    <h1>Scanned Receipts Predictor</h1>
-    <h3>Enter the following values to predict the scanned receipts for future dates</h3>
+        <h1>Scanned Receipts Predictor</h1>
+        <h3>Enter the following values to predict the scanned receipts for future dates</h3>
 
-    <!-- Form used for user input used for machine learning -->
-    <form action="{{url_for('predict')}}" method="post">
-        <input type="text" name="year" placeholder="Enter year (yyyy)" required="required" />
-        <input type="text" name="month" placeholder="Enter month (mm)" required="required" />
-        <button type="submit" class="btn">Predict</button>
-    </form>
+        <!-- Form used for user input used for machine learning -->
+        <form action="{{url_for('predict')}}" method="post">
+            <input type="text" name="year" placeholder="Year (yyyy)" required="required" />
+            <br>
+            <input type="text" name="month" placeholder="Month (mm)" required="required" />
+            <br>
+            <button type="submit" class="btn">Predict</button>
+        </form>
 
-    <br>
-    {{prediction_result}}
+        <!-- Improved prediction_result section -->
+        <div id="prediction_result">
+            {{prediction_result}}
+        </div>
     </div>
-
 </body>
 </html>
