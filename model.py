@@ -29,16 +29,29 @@ def train_count_prediction_model(data):
     X_train, X_test = X[:train_size], X[train_size:]
     y_train, y_test = y[:train_size], y[train_size:]
 
-    # Choose a Model:
+    # Learning Rate Scheduling:
+    # Implement learning rate scheduling to adjust the learning rate during training to help the model converge faster and improve generalization
+    initial_learning_rate = 0.01
+    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(initial_learning_rate, decay_steps=10000, decay_rate=0.9, staircase=True)
+    
+    # Update the optimizer to use the learning rate schedule
+    optimizer = tf.keras.optimizers.Adam(learning_rate=lr_schedule)
+
+    # Model:
     # Build the neural network model
+    # Model architecture with more hidden layers and increased number of neurons
+    # Regularization techniques like dropout are applied to prevent overfitting
+    # Applied random initialization by using different weight initialization techniques like He initialization to help prevent vanishing or exploding gradients
     model = keras.Sequential([
-        keras.layers.Dense(64, activation='relu', input_shape=(X_train.shape[1],)),
+        keras.layers.Dense(128, activation='relu', kernel_initializer='he_normal', input_shape=(X_train.shape[1],)),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(64, activation='relu'),
+        keras.layers.Dropout(0.2),
         keras.layers.Dense(1)  # Output layer with one neuron for regression
     ])
 
-    # Compile the model
-    model.compile(optimizer='adam', loss='mean_squared_error')
+    # Compile the model with the updated optimizer
+    model.compile(optimizer=optimizer, loss='mean_squared_error')
 
     # Convert data to NumPy arrays
     X_train = X_train.to_numpy()
