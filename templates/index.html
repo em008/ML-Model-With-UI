@@ -2,41 +2,7 @@
 <html>
 <head>
     <title>Scanned Receipts Predictor</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        div {
-            text-align: center;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        form {
-            display: inline-block;
-            text-align: center;
-        }
-
-        form input, form button {
-            margin: 5px;
-        }
-
-        /* Style the prediction_result section */
-        #prediction_result {
-            margin-top: 20px; /* Add some space between the form and result */
-            font-size: 18px; /* Increase the font size */
-            background-color: #f0f0f0; /* Light gray background color */
-            padding: 10px; /* Add padding */
-            border: 1px solid #ccc; /* Add a light gray border */
-            border-radius: 5px; /* Add rounded corners */
-        }
-    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 </head>
 <body>
     <div>
