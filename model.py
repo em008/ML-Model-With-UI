@@ -4,8 +4,8 @@ import tensorflow as tf
 from tensorflow import keras
 
 # Data Preparation:
-# URL of the website or API endpoint to fetch data from
-url = 'https://fetch-hiring.s3.amazonaws.com/machine-learning-engineer/receipt-count-prediction/data_daily.csv'
+# URL of API endpoint
+url = 'https://api.example.com/v1'
 
 # Load data
 data = pd.read_csv(url)
